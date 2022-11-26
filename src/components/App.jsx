@@ -14,6 +14,7 @@ export class App extends Component {
     loade: true,
     page: 1,
     name: '',
+    search: '',
   };
 
   componentDidMount() {
@@ -33,6 +34,7 @@ export class App extends Component {
       images: [],
       loade: true,
       page: 1,
+      search: '',
     });
     getImage(name, this.state.page)
       .then(data => this.setState({ images: data.hits }))
@@ -44,6 +46,13 @@ export class App extends Component {
         }));
       });
   };
+
+  onChangeSearch = (search) => {
+    this.setState(state => ({
+      ...state,
+      search,
+    }));
+  }
 
   loadeMore = () => {
     this.setState(state => ({
@@ -95,7 +104,7 @@ export class App extends Component {
   render() {
     return (
       <div className="App">
-        <Searchbar onSearch={this.onSearch} />
+        <Searchbar onSearch={this.onSearch} onChange={this.onChangeSearch} search={this.state.search} />
         <ImageGallery images={this.state.images} click={this.openModal} />
         {this.state.loade && <Loader />}
         {this.state.images.length > 0 && <Button onClick={this.loadeMore} />}
