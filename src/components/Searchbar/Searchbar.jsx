@@ -1,4 +1,6 @@
-import  PropTypes  from "prop-types";
+import PropTypes from 'prop-types';
+
+import css from './Searchbar.module.css';
 
 const onSubmit = (e, onSearch) => {
   e.preventDefault();
@@ -7,10 +9,10 @@ const onSubmit = (e, onSearch) => {
 
 export const Searchbar = ({ onSearch, search, onChange }) => {
   return (
-    <header className="Searchbar">
-      <form className="SearchForm" onSubmit={e => onSubmit(e, onSearch)}>
-        <button type="submit" className="SearchForm-button">
-          <span className="SearchForm-button-label">Search</span>
+    <header className={css.Searchbar}>
+      <form className={css.SearchForm} onSubmit={e => onSubmit(e, onSearch)}>
+        <button type="submit" className={css.SearchFormButton}>
+          <span className={css.SearchFormButtonLabel}>Search</span>
         </button>
 
         <input
@@ -18,7 +20,7 @@ export const Searchbar = ({ onSearch, search, onChange }) => {
           onChange={e => {
             onChange(e.target.value);
           }}
-          className="SearchForm-input"
+          className={css.SearchFormInput}
           type="text"
           name="search"
           autoComplete="off"
@@ -34,4 +36,4 @@ Searchbar.propTypes = {
   onSearch: PropTypes.func.isRequired,
   search: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
-}
+};

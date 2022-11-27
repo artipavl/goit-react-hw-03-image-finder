@@ -1,6 +1,8 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import css from './Modal.module.css';
+
 export class Modal extends Component {
 
   componentDidMount() {
@@ -21,10 +23,10 @@ export class Modal extends Component {
     const { src, alt, close } = this.props;
     return (
       <div
-        className="Overlay"
+        className={css.Overlay}
         onClick={e => e.target === e.currentTarget && close()}
       >
-        <div className="Modal">
+        <div className={css.Modal}>
           <img src={src} alt={alt} />
         </div>
       </div>

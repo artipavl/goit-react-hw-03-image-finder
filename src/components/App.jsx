@@ -6,6 +6,7 @@ import { Loader } from './Loader/Loader';
 import { Button } from './Button/Button';
 import { Modal } from './Modal/Modal';
 
+
 // import { nanoid } from 'nanoid';
 
 export class App extends Component {
@@ -80,12 +81,6 @@ export class App extends Component {
     }));
   };
 
-  // keyDown = e => {
-    // if (e.code === 'Escape') {
-    //   this.closeModal();
-    // }
-  // };
-
   closeModal = () => {
     this.setState(state => ({
       ...state,
@@ -96,7 +91,7 @@ export class App extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div className='App'>
         <Searchbar
           onSearch={this.onSearch}
           onChange={this.onChangeSearch}
