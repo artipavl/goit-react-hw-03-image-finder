@@ -78,14 +78,13 @@ export class App extends Component {
       src,
       alt,
     }));
-    window.addEventListener('keydown', this.keyDown);
   };
 
-  keyDown = e => {
-    if (e.code === 'Escape') {
-      this.closeModal();
-    }
-  };
+  // keyDown = e => {
+    // if (e.code === 'Escape') {
+    //   this.closeModal();
+    // }
+  // };
 
   closeModal = () => {
     this.setState(state => ({
@@ -93,8 +92,6 @@ export class App extends Component {
       src: '',
       alt: '',
     }));
-
-    window.removeEventListener('keydown', this.keyDown);
   };
 
   render() {
