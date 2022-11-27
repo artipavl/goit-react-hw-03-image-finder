@@ -10,6 +10,10 @@ body {
   font-size: 17px;
 }
 
+body.hidden{
+  overflow: hidden;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;

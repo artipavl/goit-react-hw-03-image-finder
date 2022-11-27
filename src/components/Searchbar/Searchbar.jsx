@@ -19,8 +19,8 @@ export const Searchbar = ({ onSearch, search, onChange }) => {
           className="SearchForm-input"
           type="text"
           name="search"
-          autocomplete="off"
-          autofocus
+          autoComplete="off"
+          autoFocus
           placeholder="Search images and photos"
         />
       </form>

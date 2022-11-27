@@ -11,23 +11,23 @@ import { Modal } from './Modal/Modal';
 export class App extends Component {
   state = {
     images: [],
-    loade: true,
+    loade: false,
     page: 1,
     name: '',
     search: '',
   };
 
-  componentDidMount() {
-    getImage('cat', 1)
-      .then(data => this.setState({ images: data.hits }))
-      .then(() => {
-        this.setState(state => ({
-          ...state,
-          loade: false,
-          name: 'cat',
-        }));
-      });
-  }
+  // componentDidMount() {
+  //   getImage('cat', 1)
+  //     .then(data => this.setState({ images: data.hits }))
+  //     .then(() => {
+  //       this.setState(state => ({
+  //         ...state,
+  //         loade: false,
+  //         name: 'cat',
+  //       }));
+  //     });
+  // }
 
   onSearch = name => {
     this.setState({
@@ -47,12 +47,12 @@ export class App extends Component {
       });
   };
 
-  onChangeSearch = (search) => {
+  onChangeSearch = search => {
     this.setState(state => ({
       ...state,
       search,
     }));
-  }
+  };
 
   loadeMore = () => {
     this.setState(state => ({
@@ -81,7 +81,6 @@ export class App extends Component {
       src,
       alt,
     }));
-
     window.addEventListener('keydown', this.keyDown);
   };
 
@@ -100,11 +99,15 @@ export class App extends Component {
 
     window.removeEventListener('keydown', this.keyDown);
   };
-  
+
   render() {
     return (
       <div className="App">
-        <Searchbar onSearch={this.onSearch} onChange={this.onChangeSearch} search={this.state.search} />
+        <Searchbar
+          onSearch={this.onSearch}
+          onChange={this.onChangeSearch}
+          search={this.state.search}
+        />
         <ImageGallery images={this.state.images} click={this.openModal} />
         {this.state.loade && <Loader />}
         {this.state.images.length > 0 && <Button onClick={this.loadeMore} />}
