@@ -37,14 +37,15 @@ export class App extends Component {
       page: 1,
     }));
     getImage(name, this.state.page)
-      .then((data) => {
+      .then(data => {
         this.setState(state => ({
           ...state,
           images: data.hits,
           loade: false,
           name: name,
         }));
-      }).catch(console.error)
+      })
+      .catch(console.error);
   };
 
   onChangeSearch = search => {
@@ -60,14 +61,15 @@ export class App extends Component {
       loade: true,
     }));
     getImage(this.state.name, this.state.page + 1)
-      .then((data) => {
+      .then(data => {
         this.setState(state => ({
           ...state,
           images: [...state.images, ...data.hits],
           loade: false,
           page: state.page + 1,
         }));
-      }).catch(console.error);
+      })
+      .catch(console.error);
   };
 
   openModal = (src, alt) => {

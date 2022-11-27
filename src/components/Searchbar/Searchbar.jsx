@@ -1,3 +1,5 @@
+import  PropTypes  from "prop-types";
+
 const onSubmit = (e, onSearch) => {
   e.preventDefault();
   onSearch(e.target.elements.search.value);
@@ -27,3 +29,9 @@ export const Searchbar = ({ onSearch, search, onChange }) => {
     </header>
   );
 };
+
+Searchbar.propTypes = {
+  onSearch: PropTypes.func.isRequired,
+  search: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+}
