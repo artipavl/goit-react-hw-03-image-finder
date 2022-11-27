@@ -30,21 +30,21 @@ export class App extends Component {
   // }
 
   onSearch = name => {
-    this.setState({
+    this.setState(state => ({
+      ...state,
       images: [],
       loade: true,
       page: 1,
-      search: '',
-    });
+    }));
     getImage(name, this.state.page)
-      .then(data => this.setState({ images: data.hits }))
-      .then(() => {
+      .then((data) => {
         this.setState(state => ({
           ...state,
+          images: data.hits,
           loade: false,
           name: name,
         }));
-      });
+      }).catch(console.error)
   };
 
   onChangeSearch = search => {
@@ -60,19 +60,14 @@ export class App extends Component {
       loade: true,
     }));
     getImage(this.state.name, this.state.page + 1)
-      .then(data =>
+      .then((data) => {
         this.setState(state => ({
           ...state,
           images: [...state.images, ...data.hits],
-        }))
-      )
-      .then(() => {
-        this.setState(state => ({
-          ...state,
           loade: false,
           page: state.page + 1,
         }));
-      });
+      }).catch(console.error);
   };
 
   openModal = (src, alt) => {
