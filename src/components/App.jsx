@@ -6,7 +6,6 @@ import { Loader } from './Loader/Loader';
 import { Button } from './Button/Button';
 import { Modal } from './Modal/Modal';
 
-
 // import { nanoid } from 'nanoid';
 
 export class App extends Component {
@@ -18,21 +17,10 @@ export class App extends Component {
     search: '',
   };
 
-  // componentDidMount() {
-  //   getImage('cat', 1)
-  //     .then(data => this.setState({ images: data.hits }))
-  //     .then(() => {
-  //       this.setState(state => ({
-  //         ...state,
-  //         loade: false,
-  //         name: 'cat',
-  //       }));
-  //     });
-  // }
 
   onSearch = name => {
     this.setState(state => ({
-      ...state,
+      // ...state,
       images: [],
       loade: true,
       page: 1,
@@ -40,7 +28,7 @@ export class App extends Component {
     getImage(name, this.state.page)
       .then(data => {
         this.setState(state => ({
-          ...state,
+          // ...state,
           images: data.hits,
           loade: false,
           name: name,
@@ -51,20 +39,20 @@ export class App extends Component {
 
   onChangeSearch = search => {
     this.setState(state => ({
-      ...state,
+      // ...state,
       search,
     }));
   };
 
   loadeMore = () => {
     this.setState(state => ({
-      ...state,
+      // ...state,
       loade: true,
     }));
     getImage(this.state.name, this.state.page + 1)
       .then(data => {
         this.setState(state => ({
-          ...state,
+          // ...state,
           images: [...state.images, ...data.hits],
           loade: false,
           page: state.page + 1,
@@ -75,7 +63,7 @@ export class App extends Component {
 
   openModal = (src, alt) => {
     this.setState(state => ({
-      ...state,
+      // ...state,
       src,
       alt,
     }));
@@ -83,7 +71,7 @@ export class App extends Component {
 
   closeModal = () => {
     this.setState(state => ({
-      ...state,
+      // ...state,
       src: '',
       alt: '',
     }));
@@ -91,7 +79,7 @@ export class App extends Component {
 
   render() {
     return (
-      <div className='App'>
+      <div className="App">
         <Searchbar
           onSearch={this.onSearch}
           onChange={this.onChangeSearch}
