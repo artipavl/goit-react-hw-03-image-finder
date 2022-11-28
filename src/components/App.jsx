@@ -78,21 +78,22 @@ export class App extends Component {
   };
 
   render() {
+    const { search, images, loade, src, alt } = this.state;
     return (
       <div className="App">
         <Searchbar
           onSearch={this.onSearch}
           onChange={this.onChangeSearch}
-          search={this.state.search}
+          search={search}
         />
-        <ImageGallery images={this.state.images} click={this.openModal} />
-        {this.state.loade && <Loader />}
-        {this.state.images.length > 0 && <Button onClick={this.loadeMore} />}
-        {this.state.src && (
+        <ImageGallery images={images} click={this.openModal} />
+        {loade && <Loader />}
+        {images.length > 0 && <Button onClick={this.loadeMore} />}
+        {src && (
           <Modal
             close={this.closeModal}
-            src={this.state.src}
-            alt={this.state.alt}
+            src={src}
+            alt={alt}
           />
         )}
       </div>
