@@ -4,6 +4,11 @@ import PropTypes from 'prop-types';
 import css from './Modal.module.css';
 
 export class Modal extends Component {
+  static propTypes = {
+    src: PropTypes.string.isRequired,
+    alt: PropTypes.string.isRequired,
+    close: PropTypes.func.isRequired,
+  };
 
   componentDidMount() {
     window.addEventListener('keydown', this.keyDown);
@@ -17,7 +22,7 @@ export class Modal extends Component {
     if (e.code === 'Escape') {
       this.props.close();
     }
-  }
+  };
 
   render() {
     const { src, alt, close } = this.props;
@@ -33,9 +38,3 @@ export class Modal extends Component {
     );
   }
 }
-
-Modal.propTypes = {
-  src: PropTypes.string.isRequired,
-  alt: PropTypes.string.isRequired,
-  close: PropTypes.func.isRequired,
-};
