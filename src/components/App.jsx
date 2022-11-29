@@ -1,7 +1,7 @@
 import { React, Component } from 'react';
 import { ImageGallery } from './ImageGallery/ImageGallery';
 import { Searchbar } from './Searchbar/Searchbar';
-import { getImage } from './Api/Api';
+import { getImage } from '../Api/Api';
 import { Loader } from './Loader/Loader';
 import { Button } from './Button/Button';
 import { Modal } from './Modal/Modal';
@@ -17,64 +17,64 @@ export class App extends Component {
     search: '',
   };
 
+  componentDidUpdate(_, prevState) {
+    if (
+      prevState.name !== this.state.name ||
+      prevState.page !== this.state.page
+    ) {
+      getImage(this.state.name, this.state.page)
+        .then(({ hits }) => {
+          const data = hits.map(
+            ({ id, webformatURL, largeImageURL, tags }) => ({
+              id,
+              webformatURL,
+              largeImageURL,
+              tags,
+            })
+          );
+          this.setState(state => ({
+            images: [...state.images, ...data],
+            loade: false,
+          }));
+        })
+        .catch(console.error);
+    }
+  }
 
   onSearch = name => {
     this.setState(state => ({
-      // ...state,
       images: [],
       loade: true,
       page: 1,
+      name: state.search,
     }));
-    getImage(name, this.state.page)
-      .then(data => {
-        this.setState(state => ({
-          // ...state,
-          images: data.hits,
-          loade: false,
-          name: name,
-        }));
-      })
-      .catch(console.error);
   };
 
   onChangeSearch = search => {
-    this.setState(state => ({
-      // ...state,
+    this.setState({
       search,
-    }));
+    });
   };
 
   loadeMore = () => {
     this.setState(state => ({
-      // ...state,
       loade: true,
+      page: state.page + 1,
     }));
-    getImage(this.state.name, this.state.page + 1)
-      .then(data => {
-        this.setState(state => ({
-          // ...state,
-          images: [...state.images, ...data.hits],
-          loade: false,
-          page: state.page + 1,
-        }));
-      })
-      .catch(console.error);
   };
 
   openModal = (src, alt) => {
-    this.setState(state => ({
-      // ...state,
+    this.setState({
       src,
       alt,
-    }));
+    });
   };
 
   closeModal = () => {
-    this.setState(state => ({
-      // ...state,
+    this.setState({
       src: '',
       alt: '',
-    }));
+    });
   };
 
   render() {
@@ -86,16 +86,12 @@ export class App extends Component {
           onChange={this.onChangeSearch}
           search={search}
         />
-        <ImageGallery images={images} click={this.openModal} />
+        {images.length > 0 && (
+          <ImageGallery images={images} click={this.openModal} />
+        )}
         {loade && <Loader />}
         {images.length > 0 && <Button onClick={this.loadeMore} />}
-        {src && (
-          <Modal
-            close={this.closeModal}
-            src={src}
-            alt={alt}
-          />
-        )}
+        {src && <Modal close={this.closeModal} src={src} alt={alt} />}
       </div>
     );
   }
