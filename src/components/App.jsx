@@ -42,12 +42,14 @@ export class App extends Component {
   }
 
   onSearch = name => {
-    this.setState(state => ({
-      images: [],
-      loade: true,
-      page: 1,
-      name: state.search,
-    }));
+    //перевірка на однаковий пошук
+    if (name!==this.state.name)
+      this.setState(state => ({
+        images: [],
+        loade: true,
+        page: 1,
+        name: state.search,
+      }));
   };
 
   onChangeSearch = search => {
